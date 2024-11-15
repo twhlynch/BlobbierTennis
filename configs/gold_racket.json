@@ -1,0 +1,9 @@
+{
+    "name": "gold_racket",
+    "assets": "assets/gold_racket",
+
+    "textures": {
+        "racket": "racket.png",
+        "racket_net": "racket_net.png"
+    }
+}

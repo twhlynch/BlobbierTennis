@@ -1,0 +1,10 @@
+{
+    "name": "minecraft",
+    "assets": "assets/minecraft",
+
+    "textures": {
+        "wood": "wood.png",
+        "beach": "beach.png",
+        "palm_leaf": "palm_leaf.png"
+    }
+}
