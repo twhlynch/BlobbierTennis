@@ -98,10 +98,10 @@ def mod(config):
                         continue
                     
                     print(f"Attempting to convert {path} to a .astc file")
-                    if os.path.exists("/res/bin/astcenc"):
-                        os.system(f"astcenc -cs {path} {path[:-4]}.astc 6x6 -fast")
-                    elif os.path.exists("/res/bin/astcenc-avx2.exe"):
-                        os.system(f"astcenc-avx2.exe -cs {path} {path[:-4]}.astc 6x6 -fast")
+                    if os.path.exists("res/bin/astcenc"):
+                        os.system(f"res/bin/astcenc -cs {assets}{path} {assets}{path[:-4]}.astc 6x6 -fast")
+                    elif os.path.exists("res/bin/astcenc-avx2.exe"):
+                        os.system(f"res/bin/astcenc-avx2.exe -cs {assets}{path} {assets}{path[:-4]}.astc 6x6 -fast")
                     else:
                         continue
                     
@@ -119,7 +119,7 @@ def mod(config):
                         print(f"Skipping {path} as it does not have a compatible extension")
                         continue
                     print(f"Attempting to convert {path} to a .ogg file")
-                    os.system(f"ffmpeg -i {path} -c:a libvorbis -q:a 4 {path[:-4]}.ogg")
+                    os.system(f"ffmpeg -i {assets}{path} -c:a libvorbis -q:a 4 {assets}{path[:-4]}.ogg")
                     path = f"{path[:-4]}.ogg"
                 
                 shutil.copy(f"{assets}{path}", f"{target}")
@@ -139,16 +139,16 @@ def mod(config):
 
 
 def main():
-    configs = [f for f in os.listdir('/configs') if f.endswith('.json')]
+    configs = [f for f in os.listdir('configs') if f.endswith('.json')]
 
-    if not os.path.exists('/out'):
-        os.makedirs('/out')
+    if not os.path.exists('out'):
+        os.makedirs('out')
 
     for file in configs:
         print("-" * 20)
         print(f"Generating from {file}")
 
-        with open(f'/configs/{file}', 'r') as f:
+        with open(f'configs/{file}', 'r') as f:
             config = json.load(f)
 
         mod(config)
@@ -157,3 +157,7 @@ def main():
     
     print("-" * 20)
     print("All mods completed")
+
+
+if __name__ == "__main__":
+    main()

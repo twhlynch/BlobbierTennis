@@ -1,5 +1,12 @@
-.DS_Store
-
 /res/bin
 /BT
 /out
+
+# python
+pyvenv.cfg
+/lib
+/include
+/bin
+
+# macos
+.DS_Store
