@@ -1,0 +1,46 @@
+{
+    "name": "example_mod",
+    "assets": "assets/example",
+
+    "title_image": "title.png",
+    "font": "font.ttf",
+
+    "models": {
+        "ball": "",
+        "blob": "",
+        "racket": "",
+        "beach": "",
+        "radio": "",
+        "water": "",
+        "bounds": ""
+    },
+
+    "textures": {
+        "ball": "ball.png",
+        "blob": "blob.png",
+        "racket": "racket.png",
+        "racket_net": "racket_net.png",
+        "ground_ball": "ball.png",
+        "beach": "beach.png",
+        "sky": "sky.png",
+        "palm_leaf": "palm_leaf.png",
+        "wood": "wood.png",
+        "stump": "stump.png",
+        "noise": ""
+    },
+
+    "sounds": {
+        "ball_hit": "pipe.ogg",
+        "ball_ploink": "pipe.ogg",
+        "ball_sand": "pipe.ogg",
+        "ha": "pipe.ogg",
+        "woohoo": "pipe.ogg",
+        "shore": "",
+        "noise": "",
+
+        "song1": "rick_roll.ogg",
+        "song2": "rick_roll.ogg",
+        "song3": "rick_roll.ogg",
+        "song4": "rick_roll.ogg"
+    }
+}
