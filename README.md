@@ -33,4 +33,4 @@ Setup the configs to be whatever you want. Make sure any assets such as textures
 
 Run `python3 -m venv .` to initialize a python virtual environment
 
-Run `bin/python modder.py`
+Run `bin/python modder.py` or `bin/python modder.py example` where example is the only config to generate

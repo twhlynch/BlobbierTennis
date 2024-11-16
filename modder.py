@@ -1,4 +1,4 @@
-import os, subprocess, shutil, json
+import os, subprocess, shutil, json, sys
 
 APK = "BT.apk"
 FOLDER = APK[:-4]
@@ -154,6 +154,10 @@ def mod(name, config):
 
 
 def main():
+    name = ""
+    if len(sys.argv) == 2:
+        name = sys.argv[1]
+    
     configs = [f for f in os.listdir('configs')]
 
     if not os.path.exists('out'):
@@ -162,6 +166,9 @@ def main():
     count = 0
     for folder in configs:
         if not os.path.isdir(f"configs/{folder}"):
+            continue
+        
+        if name != "" and folder != name:
             continue
         
         count += 1
