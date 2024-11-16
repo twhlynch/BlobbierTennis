@@ -1,0 +1,27 @@
+{
+    "textures": {
+        "sky": "sky.png",
+
+        "ball": "ball.png",
+        "ground_ball": "ball.png",
+        "racket": "racket.png",
+        "racket_net": "racket_net.png"
+    },
+
+    "models": {
+        "beach": "beach.sgm",
+        "water": "water.sgm",
+        "radio": "radio.sgm"
+    },
+
+    "sounds": {
+        "ball_sand": "nothing.ogg",
+        "shore": "nothing.ogg",
+        "noise": "nothing.ogg",
+
+        "song1": "nothing.ogg",
+        "song2": "nothing.ogg",
+        "song3": "nothing.ogg",
+        "song4": "nothing.ogg"
+    }
+}

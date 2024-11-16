@@ -30,6 +30,7 @@ Setup the configs to be whatever you want. Make sure any assets such as textures
 - font must be .ttf
 - all images dimensions should be kept the same
 - leave options blank ("") or remove the line, to ignore them. name, and assets however are required
+- When making custom models, the model must use all of the same texture files
 
 Run `python3 -m venv .` to initialize a python virtual environment
 
