@@ -122,6 +122,17 @@ def mod(name, config):
                     os.system(f"ffmpeg -i {assets}{path} -c:a libvorbis -q:a 4 {assets}{path[:-4]}.ogg")
                     path = f"{path[:-4]}.ogg"
                 
+                details = subprocess.run([f"ffmpeg -i {assets}{path} -hide_banner"], capture_output=True, text=True)
+                isMono = False
+                for line in details.stderr.split('\n'):
+                    if "Audio:" in line and "mono" in line.lower():
+                        isMono = True
+                        break
+                if not isMono:
+                    print(f"Reencoding {path} channel to mono")
+                    os.system(f"ffmpeg -i {assets}{path} -ac 1 {assets}{path[:-4]}_mono.ogg")
+                    path = f"{path[:-4]}_mono.ogg"
+                
                 shutil.copy(f"{assets}{path}", f"{target}")
 
     if os.path.exists(f"{FOLDER}/apktool.yml"):
@@ -143,11 +154,13 @@ def main():
 
     if not os.path.exists('out'):
         os.makedirs('out')
-
+    
+    count = 0
     for folder in configs:
         if not os.path.isdir(f"configs/{folder}"):
             continue
         
+        count += 1
         file = f"configs/{folder}/manifest.json"
         
         print("-" * 20)
@@ -161,7 +174,7 @@ def main():
         print(f"Completed {folder}")
     
     print("-" * 20)
-    print("All mods completed")
+    print(f"All {count} mods completed")
 
 
 if __name__ == "__main__":
