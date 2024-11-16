@@ -4,21 +4,21 @@ APK = "BT.apk"
 FOLDER = APK[:-4]
 
 def decompile(file, folder):
-    print(f"Decompiling {file} into {folder})")
-    sp = subprocess.Popen(f"apktool d -f {file} -o {folder}", shell=True, stdin=subprocess.PIPE)
+    print(f"Decompiling {file} into {folder}")
+    sp = subprocess.Popen(f"apktool d -f {file} -o {folder}", shell=True, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL)
     sp.communicate(input=b'\n')
 
 def recompile(file, folder):
     print(f"Recompiling {folder} into {file}")
-    sp = subprocess.Popen(f"apktool b -f --use-aapt2 -d {folder} -o tmp.apk", shell=True, stdin=subprocess.PIPE)
+    sp = subprocess.Popen(f"apktool b -f --use-aapt2 -d {folder} -o tmp.apk", shell=True, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL)
     sp.communicate(input=b'\n')
 
     print(f"Aligning {file}")
-    sp = subprocess.Popen(f"zipalign -p 4 tmp.apk tmp2.apk", shell=True, stdin=subprocess.PIPE)
+    sp = subprocess.Popen(f"zipalign -p 4 tmp.apk tmp2.apk", shell=True, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL)
     sp.communicate(input=b'\n')
 
     print(f"Signing {file}")
-    sp = subprocess.Popen(f"ApkSigner sign --key res/index.pk8 --cert res/index.pem --v4-signing-enabled false --out modded.apk tmp2.apk", shell=True, stdin=subprocess.PIPE)
+    sp = subprocess.Popen(f"ApkSigner sign --key res/index.pk8 --cert res/index.pem --v4-signing-enabled false --out modded.apk tmp2.apk", shell=True, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL)
     sp.communicate(input=b'\n')
 
     os.remove(f"tmp.apk")
@@ -97,11 +97,11 @@ def mod(name, config):
                         print(f"Skipping {path} as it is not a .astc file or .png file")
                         continue
                     
-                    print(f"Attempting to convert {path} to a .astc file")
+                    print(f"Converting {path} to a .astc file")
                     if os.path.exists("res/bin/astcenc"):
-                        os.system(f"res/bin/astcenc -cs {assets}{path} {assets}{path[:-4]}.astc 6x6 -fast")
+                        subprocess.run(f"res/bin/astcenc -cs {assets}{path} {assets}{path[:-4]}.astc 6x6 -fast".split(" "), stdout=subprocess.DEVNULL)
                     elif os.path.exists("res/bin/astcenc-avx2.exe"):
-                        os.system(f"res/bin/astcenc-avx2.exe -cs {assets}{path} {assets}{path[:-4]}.astc 6x6 -fast")
+                        subprocess.run(f"res/bin/astcenc-avx2.exe -cs {assets}{path} {assets}{path[:-4]}.astc 6x6 -fast".split(" "), stdout=subprocess.DEVNULL)
                     else:
                         continue
                     
@@ -119,10 +119,12 @@ def mod(name, config):
                         print(f"Skipping {path} as it does not have a compatible extension")
                         continue
                     print(f"Attempting to convert {path} to a .ogg file")
-                    os.system(f"ffmpeg -i {assets}{path} -c:a libvorbis -q:a 4 {assets}{path[:-4]}.ogg")
+                    if os.path.exists(f"{assets}{path[:-4]}.ogg"):
+                        os.remove(f"{assets}{path[:-4]}.ogg")
+                    subprocess.run(f"ffmpeg -i {assets}{path} -c:a libvorbis -q:a 4 {assets}{path[:-4]}.ogg".split(" "), stdout=subprocess.DEVNULL)
                     path = f"{path[:-4]}.ogg"
                 
-                details = subprocess.run([f"ffmpeg -i {assets}{path} -hide_banner"], capture_output=True, text=True)
+                details = subprocess.run(f"ffmpeg -i {assets}{path} -hide_banner".split(" "), capture_output=True, text=True)
                 isMono = False
                 for line in details.stderr.split('\n'):
                     if "Audio:" in line and "mono" in line.lower():
@@ -130,7 +132,9 @@ def mod(name, config):
                         break
                 if not isMono:
                     print(f"Reencoding {path} channel to mono")
-                    os.system(f"ffmpeg -i {assets}{path} -ac 1 {assets}{path[:-4]}_mono.ogg")
+                    if os.path.exists(f"{assets}{path[:-4]}_mono.ogg"):
+                        os.remove(f"{assets}{path[:-4]}_mono.ogg")
+                    subprocess.run(f"ffmpeg -i {assets}{path} -ac 1 {assets}{path[:-4]}_mono.ogg".split(" "), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                     path = f"{path[:-4]}_mono.ogg"
                 
                 shutil.copy(f"{assets}{path}", f"{target}")
