@@ -145,6 +145,9 @@ def main():
         os.makedirs('out')
 
     for folder in configs:
+        if not os.path.isdir(f"configs/{folder}"):
+            continue
+        
         file = f"configs/{folder}/manifest.json"
         
         print("-" * 20)
