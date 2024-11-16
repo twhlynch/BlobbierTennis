@@ -42,11 +42,11 @@ def mod(name, config):
         "bounds": f"{MODELS_PATH}/uberpixel/bounds.sgm"
     }
     TEXTURES = {
-        "ball": f"{MODELS_PATH}/simon/ball/ballbacked.astc",
+        "ball": f"{MODELS_PATH}/simon/ball/ballbaked.astc",
         "blob": f"{MODELS_PATH}/simon/blob/body.astc",
         "racket": f"{MODELS_PATH}/simon/racket/racketbaked.astc",
         "racket_net": f"{MODELS_PATH}/simon/racket/racketnet.astc",
-        "ground_ball": f"{MODELS_PATH}/simon/ground/ballbacked.astc",
+        "ground_ball": f"{MODELS_PATH}/simon/ground/ballbaked.astc",
         "beach": f"{MODELS_PATH}/simon/ground/groundbaked.astc",
         "sky": f"{MODELS_PATH}/Optikz/sky_lightblue.astc",
         "palm_leaf": f"{MODELS_PATH}/simon/ground/palmleaf.astc",
