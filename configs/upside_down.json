@@ -1,8 +1,0 @@
-{
-    "name": "upside_down",
-    "assets": "assets/upside_down",
-
-    "models": {
-        "blob": "blob.sgm"
-    }
-}

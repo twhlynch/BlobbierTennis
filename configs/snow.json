@@ -1,9 +1,0 @@
-{
-    "name": "snow",
-    "assets": "assets/snow",
-
-    "textures": {
-        "beach": "beach.png",
-        "palm_leaf": "palm_leaf.png"
-    }
-}

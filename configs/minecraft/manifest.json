@@ -1,0 +1,14 @@
+{
+    "textures": {
+        "wood": "wood.png",
+        "beach": "beach.png",
+        "palm_leaf": "palm_leaf.png"
+    },
+
+    "sounds": {
+        "song1": "song1.ogg",
+        "song2": "song2.ogg",
+        "song3": "song3.ogg",
+        "song4": "song4.ogg"
+    }
+}

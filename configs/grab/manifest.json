@@ -1,7 +1,4 @@
 {
-    "name": "grab",
-    "assets": "assets/grab",
-
     "textures": {
         "sky": "sky.png"
     }

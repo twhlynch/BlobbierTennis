@@ -25,7 +25,7 @@ def recompile(file, folder):
     os.remove(f"tmp2.apk")
     shutil.rmtree(folder)
 
-def mod(config):
+def mod(name, config):
     decompile(APK, FOLDER)
 
     RESOURCES = f"{FOLDER}/assets/Resources"
@@ -68,7 +68,7 @@ def mod(config):
         "song4": f"{AUDIO_PATH}/whatfunk/silhouette.ogg"
     }
 
-    assets = f"configs/{config["assets"]}/"
+    assets = f"configs/{name}/"
 
     if "title_image" in config and config["title_image"] != "":
         shutil.copy(f"{assets}{config['title_image']}", f"{RESOURCES}/textures/title.png")
@@ -125,35 +125,37 @@ def mod(config):
                 shutil.copy(f"{assets}{path}", f"{target}")
 
     if os.path.exists(f"{FOLDER}/apktool.yml"):
-        with open(f"{FOLDER}/apktool.yml", 'r') as file:
-            filedata = file.read()
+        with open(f"{FOLDER}/apktool.yml", 'r') as f:
+            filedata = f.read()
         
-        filedata = filedata.replace('renameManifestPackage: null', f"renameManifestPackage: com.index.blobby_tennis_{config["name"]}")
+        filedata = filedata.replace('renameManifestPackage: null', f"renameManifestPackage: com.index.blobby_tennis_{name}")
         
-        with open(f"{FOLDER}/apktool.yml", 'w') as file:
-            file.write(filedata)
+        with open(f"{FOLDER}/apktool.yml", 'w') as f:
+            f.write(filedata)
 
     recompile(APK, FOLDER)
 
-    os.rename("modded.apk", f"out/blobby_tennis_{config["name"]}.apk")
+    os.rename("modded.apk", f"out/blobby_tennis_{name}.apk")
 
 
 def main():
-    configs = [f for f in os.listdir('configs') if f.endswith('.json')]
+    configs = [f for f in os.listdir('configs')]
 
     if not os.path.exists('out'):
         os.makedirs('out')
 
-    for file in configs:
+    for folder in configs:
+        file = f"configs/{folder}/manifest.json"
+        
         print("-" * 20)
-        print(f"Generating from {file}")
+        print(f"Generating {folder}")
 
-        with open(f'configs/{file}', 'r') as f:
+        with open(file, 'r') as f:
             config = json.load(f)
 
-        mod(config)
+        mod(folder, config)
 
-        print(f"Completed {file}")
+        print(f"Completed {folder}")
     
     print("-" * 20)
     print("All mods completed")

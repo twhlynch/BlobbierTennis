@@ -1,8 +1,0 @@
-{
-    "name": "pear_blobby",
-    "assets": "assets/pear_blobby",
-
-    "textures": {
-        "blob": "blob.png"
-    }
-}
