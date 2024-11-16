@@ -1,6 +1,6 @@
 # Blobbier Tennis
 
-<img src="configs/assets/example/title.png" width="300">
+<img src="configs/example/title.png" width="300">
 
 Automated modding for Blobby Tennis by Slin
 
